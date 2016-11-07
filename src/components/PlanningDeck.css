@@ -1,3 +1,57 @@
+.PlanningDeck .ppa-header {	
+	position: fixed;
+	top: 0;
+	width: 100%;
+	min-height: 50px;
+	background-color: rgb(222, 225, 226);
+	background-image: url(https://chas.se/assets/img/ui/textures/light-grunge-texture-.50.png);
+    box-shadow: 0 2px 24px rgba(0, 0, 28, 0.6);
+    z-index: 9999;
+    padding: .8em;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #24a2b5;
+}
+
+.PlanningDeck .ppa-header h1 {
+	font-size: 1.4em;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+.PlanningDeck .userStory {
+	width: 100%;
+	background: #2d2d2d;
+	color: #eaeaea;
+	height: 15em;
+	background: #2e3b3e url(./grunge-background.png) 0 0 repeat;
+	border-bottom: 1px solid #24a2b5;
+}
+
+.PlanningDeck .userStory p {
+	margin: 0;
+}
+
+.PlanningDeck .case {
+	padding: 2em 0 0 0;
+	max-width: 30em;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.PlanningDeck .case h3 {
+	text-transform: uppercase;
+	font-size: 1.2em;
+	margin: 0;
+}
+
+.PlanningDeck .container {
+	margin-top: 88px;
+	background: #f5f3f0;
+}
+
 .PlanningDeck .cards {
 	list-style: none;
 	margin: 0;
@@ -6,4 +60,42 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
+}
+
+.PlanningDeck .phaseChangeButton {
+	width: 20em;
+	margin: 2% auto 2% auto;
+	border: none;
+	outline: none;
+	padding: 2em;
+	display: block;
+	cursor: pointer;
+	background: #f5f3f0;
+	color: #24a2b5;
+	position: relative;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+	border-radius: 4px;
+	text-transform: uppercase;
+}
+
+.PlanningDeck .phaseChangeButton:hover {
+	font-size: .74em;
+	transition: font-size .2s ease-in-out;
+}
+
+.PlanningDeck .phaseChangeButton::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .6);
+	opacity: 0;
+	transition: opacity .3s ease-in-out;
+	border-radius: 4px;
+}
+
+.PlanningDeck .phaseChangeButton:hover::after {
+	opacity: 1;
 }

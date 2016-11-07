@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import update from 'react-addons-update'
+
 import Card from './card/Card'
 import Waiting from './waiting/Waiting'
 
@@ -27,16 +29,31 @@ class PlanningDeck extends Component {
 	}
 
 	updatePlayerCard = (players, num, index) => {
-		//console.log(players, num, index)
 		this.setState({
 			players
 		})
 
 		if ((index + 1) === num) {
-			this.setState({
-				playersReady: true
-			})
+			setTimeout(() => {
+				this.setState({
+					phase: 'reveal'
+				})
+			}, 500)
 		}
+	}
+
+	restartApplication = () => {
+		this.state.players.forEach((player, index) => {
+			let players = this.state.players
+			players[index] = update(players[index], {selectedCard: {$set: null}})
+			this.setState({
+				players
+			})
+		})
+		this.setState({
+			selectedCard: null,
+			phase: 'select'
+		})
 	}
 
 	render() {
@@ -48,14 +65,35 @@ class PlanningDeck extends Component {
 
 		return (
 			<div className="PlanningDeck">
-				{this.state.phase === 'select' && (
-					<div className="cards">
-						{cards}
-					</div>
-				)}
-				{this.state.phase === 'waiting' && (
-					<Waiting playersReady={this.state.playersReady} deck={this.props.deck} players={this.state.players} userCard={this.state.selectedCard} updatePlayerState={this.updatePlayerCard} />
-				)}
+				<div className="container">
+					<header className="ppa-header">
+						<h1>PlanningDeck</h1>
+						<p>Phase: {this.state.phase}</p>
+					</header>
+					<article className="userStory">
+						<header><p>Backlog case #1</p></header>
+						<div className="case case-1">
+							<header>
+								<h3>Create a planning poker app</h3>
+							</header>
+							<div>	
+								To better plan our resources, we need a fun and smooth way to estimate time and effort for our different cases in the backlog. Therefore, we need 
+								to develop a planning poker application. 
+							</div>
+						</div>
+					</article>
+					{this.state.phase === 'select' && (
+						<div className="cards">
+							{cards}
+						</div>
+					)}
+					{this.state.phase !== 'select' && (
+						<Waiting playersReady={this.state.phase} deck={this.props.deck} players={this.state.players} userCard={this.state.selectedCard} updatePlayerState={this.updatePlayerCard} />
+					)}
+					{this.state.phase === 'reveal' && (
+						<button className="phaseChangeButton" onClick={this.restartApplication}>Restart</button>
+					)}
+				</div>
 			</div>
 		)
 	}

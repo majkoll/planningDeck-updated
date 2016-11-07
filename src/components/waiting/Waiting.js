@@ -18,10 +18,6 @@ class Waiting extends Component {
 			}, (index+1) * 1000)
 		})
 	}
-	
-	flip = () => {
-		console.log('flip')
-	}
 
 	/*
 	* This function let's each team member select a card from the deck.
@@ -55,7 +51,6 @@ class Waiting extends Component {
 		})
 		return (
 			<div>
-				Waiting
 				<div className="cards">
 					<Card playersReady={this.props.playersReady} card={this.props.userCard} key='user' player='User' />
 					{userCards}
@@ -72,5 +67,5 @@ Waiting.propTypes = {
 	updatePlayerState: React.PropTypes.func.isRequired,
 	deck: React.PropTypes.object.isRequired,
 	userCard: React.PropTypes.string.isRequired,
-	playersReady: React.PropTypes.bool.isRequired
+	playersReady: React.PropTypes.string.isRequired
 }

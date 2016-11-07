@@ -15,7 +15,7 @@
 }
 
 .Card:hover .flipper {
-	transform: rotateY(0deg);
+	/*transform: rotateY(0deg);*/
 }
 
 .Card.select, .Card .front, .Card .back {

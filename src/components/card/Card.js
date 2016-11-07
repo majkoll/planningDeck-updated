@@ -14,9 +14,9 @@ class Card extends Component {
 
 		let typeOfCard = this.props.card,
 			selectCard = (this.props.onClick) ? 'select' : '',
-			hover = (this.props.playersReady) ? 'hover' : '',
+			hover = (this.props.playersReady === 'reveal') ? 'hover' : '',
 			active = (this.props.active) ? 'active' : '',
-			classes = classNames('Card', selectCard, typeOfCard, active, hover),
+			classes = classNames('Card', selectCard, active, hover),
 			output = (typeOfCard === 'questionMark') ? '?' : typeOfCard,
 			player = <p className="player">{this.props.player}</p>
 
@@ -52,5 +52,5 @@ Card.propTypes = {
 	card: React.PropTypes.string,
 	active: React.PropTypes.bool,
 	player: React.PropTypes.string,
-	playersReady: React.PropTypes.bool
+	playersReady: React.PropTypes.string
 }
