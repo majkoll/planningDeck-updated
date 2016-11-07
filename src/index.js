@@ -5,12 +5,7 @@ import './index.css';
 
 const state = {
 	phase: 'select',
-	phases: {
-		select_phase: 'select',
-		waiting_phase: 'waiting',
-		reveal_phase: 'reveal'
-	}, 
-	teamMembers: [
+	players: [
 		{
 			id: 101,
 			nickname: 'Mr Pink',
@@ -39,6 +34,6 @@ const deck = {
 }
 
 ReactDOM.render(
-  <PlanningDeck />,
+  <PlanningDeck state={state} deck={deck} />,
   document.getElementById('planningDeck')
 );
