@@ -2,8 +2,8 @@
 
 Run the app locally
 ```sh
-$ git clone https://github.com/majkoll/PlanningPoker
-$ cd PlanningPoker
+$ git clone https://github.com/majkoll/planningDeck-updated
+$ cd planningDeck-updated
 $ npm install
 $ npm start
 ```
