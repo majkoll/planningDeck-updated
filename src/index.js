@@ -25,7 +25,6 @@ const state = {
 			selectedCard: null
 		},
 	],
-	playersReady: false,
 	selectedCard: null
 }
 
