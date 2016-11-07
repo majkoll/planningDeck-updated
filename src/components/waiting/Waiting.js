@@ -3,6 +3,8 @@ import update from 'react-addons-update'
 import Card from '../card/Card'
 import Spinner from '../player/player-selecting.gif'
 
+import './Waiting.css'
+
 class Waiting extends Component {
 	
 	componentDidMount() {
@@ -46,18 +48,18 @@ class Waiting extends Component {
 	render() {
 		let userCards = this.props.players.map((player, index) => {
 			if (player.selectedCard) {
-				return <Card key={index} card={player.selectedCard} player={player.nickname} />
+				return <Card key={index} card={player.selectedCard} player={player.nickname} playersReady={this.props.playersReady} />
 			} else {
-				return <img src={Spinner} alt="spinner" key={index} />
+				return <div className="spinnerContainer"><img src={Spinner} alt="spinner" key={index} /></div>
 			}
 		})
 		return (
 			<div>
 				Waiting
-				<ul className="cards">
-					<Card card={this.props.userCard} key='user' player='User' />
+				<div className="cards">
+					<Card playersReady={this.props.playersReady} card={this.props.userCard} key='user' player='User' />
 					{userCards}
-				</ul>	
+				</div>
 			</div>
 		)
 	}
@@ -69,5 +71,6 @@ Waiting.propTypes = {
 	players: React.PropTypes.array.isRequired,
 	updatePlayerState: React.PropTypes.func.isRequired,
 	deck: React.PropTypes.object.isRequired,
-	userCard: React.PropTypes.string.isRequired
+	userCard: React.PropTypes.string.isRequired,
+	playersReady: React.PropTypes.bool.isRequired
 }

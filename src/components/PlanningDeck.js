@@ -23,7 +23,7 @@ class PlanningDeck extends Component {
 					phase: 'waiting'
 				})
 			}
-		}, 500)
+		}, 100)
 	}
 
 	updatePlayerCard = (players, num, index) => {
@@ -34,7 +34,7 @@ class PlanningDeck extends Component {
 
 		if ((index + 1) === num) {
 			this.setState({
-				teamMembersReady: true
+				playersReady: true
 			})
 		}
 	}
@@ -49,12 +49,12 @@ class PlanningDeck extends Component {
 		return (
 			<div className="PlanningDeck">
 				{this.state.phase === 'select' && (
-					<ul className="cards">
+					<div className="cards">
 						{cards}
-					</ul>
+					</div>
 				)}
 				{this.state.phase === 'waiting' && (
-					<Waiting deck={this.props.deck} players={this.state.players} userCard={this.state.selectedCard} updatePlayerState={this.updatePlayerCard} />
+					<Waiting playersReady={this.state.playersReady} deck={this.props.deck} players={this.state.players} userCard={this.state.selectedCard} updatePlayerState={this.updatePlayerCard} />
 				)}
 			</div>
 		)

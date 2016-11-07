@@ -1,23 +1,38 @@
 .Card {
+	perspective: 1000px;
+	width: 7em;
+	height: 16em;
+	margin: .8em;
+	cursor: pointer;
+}
+.Card.select {
+	perspective: 0;
+	position: relative;
+} 
+
+.Card.hover .flipper  {
+	transform: rotateY(180deg);
+}
+
+.Card:hover .flipper {
+	transform: rotateY(0deg);
+}
+
+.Card.select, .Card .front, .Card .back {
 	width: 7em;
 	height: 12em;
-	/*background: #24a2b5;*/
-    background-image: linear-gradient( rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.28) 50%, rgba(255, 255, 255, 0) 51%, rgba(255, 255, 255, 0) 100%), url('./card-texture.png'), linear-gradient( #14e7f5, #02679d);
-	margin: .8em;
+	background-image: linear-gradient( rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.28) 50%, rgba(255, 255, 255, 0) 51%, rgba(255, 255, 255, 0) 100%), url('./card-texture.png'), linear-gradient( #14e7f5, #02679d);
 	border-radius: 4px;
 	padding: .4em;
 	box-sizing: border-box;
-	position: relative;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
 	color: #f5f3f0;
 	text-align: center;
 }
 
-.Card.active {
-	box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+.Card.select {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
 }
-
-.Card::after {
+.Card.select:after {
 	content: '';
 	position: absolute;
 	width: 100%;
@@ -26,34 +41,51 @@
 	left: 0;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, .25);
 	opacity: 0;
-	transition: opacity .3s ease-in-out;
+	border-radius: 4px;
+	transition: opacity .2s ease-in-out;
 }
 
-.Card:hover::after {
+.Card.select:hover::after {
 	opacity: 1;
 }
 
-.Card:hover {
-	cursor: pointer;
+.Card .flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
 }
 
-.Card p {
-	padding-top: 16%;
-	font-size: 2.2em;
-	opacity: .9;
+.Card .front, .Card .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
-/*
-.Card.coffee p {
-	background-image: url(./coffee.png);
-	background-size: 70%, contain;
-	background-position: 0 50%;
-	background-repeat: no-repeat;
-}
-*/
 
-.Card img {
+.Card .back {
+	z-index: 2;
+	transform: rotateY(0deg);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+}
+
+.Card .back img {
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	max-width: 100%;
+}
+
+.Card .front {
+	transform: rotateY(180deg);
+}
+
+.Card.select p, .Card .front p {
+	padding-top: 16%;
+	font-size: 2.2em;
+	opacity: .9;
+}
+
+.Card .player {
+	position: absolute;
+	bottom: 0;
 }

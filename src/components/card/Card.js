@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 
-//import logo from './chas-logo.png'
+import logo from './chas-logo.png'
 import './Card.css'
 
 class Card extends Component {
@@ -13,26 +13,35 @@ class Card extends Component {
 	render() {
 
 		let typeOfCard = this.props.card,
+			selectCard = (this.props.onClick) ? 'select' : '',
+			hover = (this.props.playersReady) ? 'hover' : '',
 			active = (this.props.active) ? 'active' : '',
-			classes = classNames('Card', typeOfCard, active),
+			classes = classNames('Card', selectCard, typeOfCard, active, hover),
 			output = (typeOfCard === 'questionMark') ? '?' : typeOfCard,
-			player = <p className="playersCard">{this.props.player}</p>
+			player = <p className="player">{this.props.player}</p>
 
-		return (
-			<div>
-				{this.props.onClick && (
-					<li id={typeOfCard} className={classes} onClick={this.clickHandler}>
-						<p>{ output }</p>
-					</li>
-				)}
-				{!this.props.onClick && (
-					<li id={typeOfCard} className={classes}>
-						<p>{ output }</p>
-					</li>
-				)}
-				{player}
-			</div>
-		)
+		if (this.props.onClick) {
+			return (
+				<div id={typeOfCard} className={classes} onClick={this.clickHandler}>
+					<p>{ output }</p>
+				</div>
+			)
+		} else {
+			return (	
+				<div id={typeOfCard} className={classes}>
+					<div className="flipper">
+						<div className="front">
+							<p>{output}</p>
+						</div>
+						<div className="back">
+							<img src={logo} alt="Chas logotype" />
+						</div>
+					</div>
+					{player}
+				</div>
+			)	
+		}
+		
 	}
 }
 
@@ -42,5 +51,6 @@ Card.propTypes = {
 	onClick: React.PropTypes.func,
 	card: React.PropTypes.string,
 	active: React.PropTypes.bool,
-	player: React.PropTypes.string
+	player: React.PropTypes.string,
+	playersReady: React.PropTypes.bool
 }
