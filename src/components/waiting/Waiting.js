@@ -50,7 +50,7 @@ class Waiting extends Component {
 			if (player.selectedCard) {
 				return <Card key={index} card={player.selectedCard} player={player.nickname} playersReady={this.props.playersReady} />
 			} else {
-				return <div className="spinnerContainer"><img src={Spinner} alt="spinner" key={index} /></div>
+				return <div className="spinnerContainer" key={index}><img src={Spinner} alt="spinner" /></div>
 			}
 		})
 		return (
