@@ -10,29 +10,47 @@ class PlanningDeck extends Component {
 	
 	state = this.props.state
 
+	componentDidMount() {
+		this.setState({
+			phase: this.state.phase || 'select'
+		})
+	}
+
 	/**
-	* cardSelection function
+	* cardSelection()
 	* @param value
-	* This function
+	* Set the state for users selectedCard so we can render a new phase
 	**/
 	cardSelection = (value) => {
+		// change selectedCards state to the selected cards value
 		this.setState({
 			selectedCard: value
 		})
-		setTimeout(() => {
-			if (this.state.selectedCard) {
-				this.setState({
-					phase: 'waiting'
-				})
-			}
-		}, 100)
+		// If selected card set, change the state from select to waiting
+		if (this.state.selectedCard) {
+			this.setState({
+				phase: 'waiting'
+			})
+		}
 	}
 
+	/*
+	* updatePlayerCard() 
+	* @param players {object} - the players object
+	* @param num  {number} - the number of players
+	* @param index {number} - number of which iteration
+	*
+	* This function is sent down to the Waiting component as prop
+	* It's run for every player that participate
+	* updates the state of players. To be specific, the selecteCard value.
+	*/
 	updatePlayerCard = (players, num, index) => {
 		this.setState({
 			players
 		})
 
+		// if the iteration is the same as number of players, we know that all the 
+		// players has selected a card, and we can go on to the reveal phase
 		if ((index + 1) === num) {
 			setTimeout(() => {
 				this.setState({
@@ -42,6 +60,11 @@ class PlanningDeck extends Component {
 		}
 	}
 
+	/*
+	* restartApplication()
+	* Sets phase back to select and sets the users selectedCard back to null, and all players selected card back to null
+	* So we can play again and again.
+	*/
 	restartApplication = () => {
 		this.state.players.forEach((player, index) => {
 			let players = this.state.players
@@ -57,7 +80,7 @@ class PlanningDeck extends Component {
 	}
 
 	render() {
-		// Set up the users cards for the select phase
+		// Set up the deck of cards that the user can choose from
 		let cards = this.props.deck.cards.map((card, index) => {
 			let active = (card === this.state.selectedCard ? true : false)
 			return <Card card={card} key={index} onClick={this.cardSelection} active={active} />
@@ -101,6 +124,7 @@ class PlanningDeck extends Component {
 
 export default PlanningDeck
 
+// Defining that this component always should get these props. Good for testing.
 PlanningDeck.propTypes = {
 	state: React.PropTypes.object.isRequired,
 	deck: React.PropTypes.object.isRequired
