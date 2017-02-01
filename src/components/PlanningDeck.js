@@ -22,16 +22,12 @@ class PlanningDeck extends Component {
 	* Set the state for users selectedCard so we can render a new phase
 	**/
 	cardSelection = (value) => {
-		// change selectedCards state to the selected cards value
+		// Change selectedCards state to the selected cards value
+		// And change the phase-state to waiting (waiting for other players to decide)
 		this.setState({
-			selectedCard: value
+			selectedCard: value,
+			phase: 'waiting'
 		})
-		// If selected card set, change the state from select to waiting
-		if (this.state.selectedCard) {
-			this.setState({
-				phase: 'waiting'
-			})
-		}
 	}
 
 	/*
